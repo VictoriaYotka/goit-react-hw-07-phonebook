@@ -5,14 +5,14 @@ import { removeContact } from 'redux/contactsSlice';
 
 export function ContactList() {
     const dispatch = useDispatch();
-    const contacts = useSelector(getContacts);
-    const filter = useSelector(getFilter);
+    const contactItems = useSelector(getContacts);
+    const filterValue = useSelector(getFilter);
 
       const handleDeleteButton = (id) => {
         dispatch(removeContact(id))
     }
 
-    const filteredContacts = contacts.filter(({name}) => name.toLowerCase().includes(filter.toLowerCase()));
+    const filteredContacts = contactItems.filter(({name}) => name.toLowerCase().includes(filterValue.toLowerCase()));
 
     return (
         <ul className={css.list}>
