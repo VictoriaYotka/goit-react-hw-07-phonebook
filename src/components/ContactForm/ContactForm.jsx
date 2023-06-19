@@ -1,34 +1,34 @@
 import css from './ContactForm.module.css'
-import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
-import {selectContacts } from 'redux/selectors';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { addContact } from 'redux/contactsSlice';
+// import {selectContacts } from 'redux/selectors';
 
 
 export function ContactForm() {
 
-  const contacts = useSelector(selectContacts)
-  const dispatch = useDispatch();
+  // const contacts = useSelector(selectContacts)
+  // const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
-    const form = e.currentTarget;
-    e.preventDefault();
+  // const handleSubmit = (e) => {
+  //   const form = e.currentTarget;
+  //   e.preventDefault();
   
-      const newName = form.elements.name.value;
-      const newNumber = form.elements.number.value; 
+  //     const newName = form.elements.name.value;
+  //     const newNumber = form.elements.number.value; 
 
-    if(contacts.find(({name}) => name === newName)) {
-      alert (`${newName} is already in contacts`)
+  //   if(contacts.find(({name}) => name === newName)) {
+  //     alert (`${newName} is already in contacts`)
 
-    } else {dispatch(addContact({name: newName,
-      number: newNumber}))}
+  //   } else {dispatch(addContact({name: newName,
+  //     number: newNumber}))}
 
-    form.reset()
-  }
+  //   form.reset()
+  // }
 
     return (
         <>
 
-        <form onSubmit={handleSubmit} className={css.form}>
+        <form className={css.form}>
     <label htmlFor="name" className={css.label}>Name</label>
 <input
 className={css.input}
