@@ -13,7 +13,7 @@ export function ContactList() {
 
     return (
         <ul className={css.list}>
-            {filteredContacts.map(({id, name, number}) => <li key={id} className={css.item}>{name}: {number}
+            {filteredContacts.map(({id, name, phone}) => <li key={id} className={css.item}>{name}: {phone}
             <button className={css.button}>Delete</button>
             </li>)}
         </ul>
