@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getContacts } from "redux/operations";
+import { fetchContacts } from "redux/operations";
 import { ContactForm } from "./ContactForm/ContactForm";
 import { Filter } from "./Filter/Filter";
 import { ContactList } from "./ContactList/ContactList";
@@ -14,7 +14,7 @@ export function App () {
   const filteredContacts = useSelector(selectfilteredContacts)
 
   useEffect(() => {
-    dispatch(getContacts());
+    dispatch(fetchContacts());
   }, [dispatch]);
 
   return (
