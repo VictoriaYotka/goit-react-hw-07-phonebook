@@ -1,12 +1,10 @@
 import css from './ContactForm.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/operations';
-// import { addContact } from 'redux/contactsSlice';
 import {selectContacts } from 'redux/selectors';
 
 
 export function ContactForm() {
-
   const contacts = useSelector(selectContacts)
   const dispatch = useDispatch();
 
@@ -35,7 +33,7 @@ export function ContactForm() {
           type="text"
           name="name"
           id="name"
-          pattern="[a-zA-Z]*"
+          pattern="[a-zA-Z ]*"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
         />
