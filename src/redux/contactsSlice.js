@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchContacts, addContact, deleteContact } from "./operations";
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const initialState = {
     items: [],
     isLoading: false,
-    error: null,
-    
+    error: null,  
 };
 
 const contactsSlice = createSlice({
@@ -30,16 +30,40 @@ const contactsSlice = createSlice({
     extraReducers: (builder) => {
         builder
       .addCase(fetchContacts.fulfilled, (state, {payload}) => {
+        state.isLoading = false;
+        state.error = null;
         state.items = payload
-    })
-    .addCase(addContact.fulfilled, ({items}, {payload}) => {
-        items.push(payload)
-    })
-    .addCase(deleteContact.fulfilled, (state, {payload}) => {
-        const index = state.items.findIndex(
-            contact => contact.id === payload.id);
-        state.items.splice(index, 1);
-    })
+        })
+        .addCase(addContact.fulfilled, (state, {payload}) => {
+            Notify.success(`${payload.name} successfully added!`)
+            state.isLoading = false;
+            state.error = null;
+            state.items.push(payload)
+        })
+        .addCase(deleteContact.fulfilled, (state, {payload}) => {
+            Notify.success(`${payload.name} successfully deleted!`)
+            state.isLoading = false;
+            state.error = null;
+            const index = state.items.findIndex(
+                contact => contact.id === payload.id);
+            state.items.splice(index, 1);
+        })
+        .addCase(fetchContacts.pending, (state) => {
+            state.isLoading = true;
+            state.error = null
+        })
+        // .addCase(addContact.pending, (state) => loading(state))
+        // .addCase(deleteContact.pending, (state) => loading(state))
+        .addCase(fetchContacts.rejected, (state, {payload}) => {
+            state.isLoading = false;
+            state.error = payload;
+        })
+        .addCase(addContact.rejected, (state, {payload}) => {
+            Notify.failure(`${payload}, not added. Try again`)
+        })
+        .addCase(deleteContact.rejected, (state, {payload}) => {
+            Notify.failure(`${payload}, not deleted. Try again`)
+        })
     }})
   
   export const contactsReducer = contactsSlice.reducer

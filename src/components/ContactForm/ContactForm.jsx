@@ -1,4 +1,5 @@
 import css from './ContactForm.module.css'
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/operations';
 import {selectContacts } from 'redux/selectors';
@@ -11,13 +12,11 @@ export function ContactForm() {
   const handleSubmit = (e) => {
     const form = e.currentTarget;
     e.preventDefault();
-  
       const newName = form.elements.name.value;
       const newPhone = form.elements.phone.value; 
 
     if(contacts.find(({name}) => name === newName)) {
-      alert (`${newName} is already in contacts`)
-
+      Notify.info(`${newName} is already in contacts`);
     } else {dispatch(addContact({name: newName,
       phone: newPhone}))}
 

@@ -5,13 +5,13 @@ import { ContactForm } from "./ContactForm/ContactForm";
 import { Filter } from "./Filter/Filter";
 import { ContactList } from "./ContactList/ContactList";
 import css from './App.module.css'
-import { selectfilteredContacts } from "redux/selectors";
+import { selectFilteredContacts } from "redux/selectors";
 
 
 
 export function App () {
   const dispatch = useDispatch();
-  const filteredContacts = useSelector(selectfilteredContacts)
+  const filteredContacts = useSelector(selectFilteredContacts)
 
   useEffect(() => {
     dispatch(fetchContacts());
