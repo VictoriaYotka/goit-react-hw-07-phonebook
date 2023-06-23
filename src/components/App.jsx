@@ -21,7 +21,10 @@ export function App () {
 
   return (
     <div className={css.container}>
-       <ToastContainer autoClose={2000} />
+       <ToastContainer 
+       autoClose={2000}
+       hideProgressBar={true}
+       />
       <h1 className={css.main_title}>Phonebook</h1>
       <ContactForm/>
 
