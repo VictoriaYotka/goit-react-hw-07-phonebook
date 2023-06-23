@@ -6,6 +6,8 @@ import { Filter } from "./Filter/Filter";
 import { ContactList } from "./ContactList/ContactList";
 import css from './App.module.css'
 import { selectFilteredContacts } from "redux/selectors";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -19,6 +21,7 @@ export function App () {
 
   return (
     <div className={css.container}>
+       <ToastContainer autoClose={2000} />
       <h1 className={css.main_title}>Phonebook</h1>
       <ContactForm/>
 

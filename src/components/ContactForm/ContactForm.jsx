@@ -1,5 +1,6 @@
 import css from './ContactForm.module.css'
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { toast } from "react-toastify";
+
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/operations';
 import {selectContacts } from 'redux/selectors';
@@ -16,9 +17,14 @@ export function ContactForm() {
       const newPhone = form.elements.phone.value; 
 
     if(contacts.find(({name}) => name === newName)) {
-      Notify.info(`${newName} is already in contacts`);
+        toast.info(`${newName} is already in contacts`);
     } else {dispatch(addContact({name: newName,
-      phone: newPhone}))}
+      phone: newPhone})).unwrap()
+      .then(() => 
+      toast.success(`${newName} successfully added!`))
+      .catch(() => 
+        toast.error(`Something went wrong, ${newName} not added. Try again `))     
+    }
 
     form.reset()
   }
@@ -37,7 +43,7 @@ export function ContactForm() {
           required
         />
 
-        <label htmlFor="number" className={css.label}>Number</label>
+        <label htmlFor="phone" className={css.label}>Phone</label>
         <input
           className={css.input}
           type="tel"
